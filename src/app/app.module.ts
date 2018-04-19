@@ -13,10 +13,10 @@ import { MyApp } from './app.component';
 import { LoginService } from '../providers/login/login.service';
 import { Principal } from '../providers/auth/principal.service';
 import { AccountService } from '../providers/auth/account.service';
-import { AuthServerProvider } from '../providers/auth/auth-jwt.service';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { AuthInterceptor } from '../providers/auth/auth-interceptor';
 import { EntityPageModule } from '../pages/entities/entity.module';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -55,7 +55,8 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    EntityPageModule
+    EntityPageModule,
+    OAuthModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,7 +68,6 @@ export function provideSettings(storage: Storage) {
     LoginService,
     Principal,
     AccountService,
-    AuthServerProvider,
     LocalStorageService,
     SessionStorageService,
     Camera,
