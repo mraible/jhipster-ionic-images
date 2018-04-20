@@ -5,7 +5,9 @@ import { ProductService } from './product.provider';
 import { JhiDataUtils } from 'ng-jhipster';
 
 @IonicPage({
-    segment: 'product-detail/:id'
+    name: 'product-detail',
+    segment: 'product-detail/:id',
+    defaultHistory: ['EntityPage', 'ProductPage']
 })
 @Component({
     selector: 'page-product-detail',
