@@ -21,9 +21,8 @@
                 <p>{{product.price}}</p>
                 <ion-avatar *ngIf="product.image">
                     <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" />
-                    <span *ngIf="product.image">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
+                    <p *ngIf="product.image">{{product.imageContentType}}, {{byteSize(product.image)}}</p>
                 </ion-avatar>
-                <!-- todo: what to do when it's a byte[] or ByteBuffer? In normal entity generatory, an open link is rendered -->
             </button>
             <ion-item-options>
                 <button ion-button color="primary" (click)="open(slidingItem, product)">

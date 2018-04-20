@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavParams, ToastController } from 'ionic-angular';
 import { Product } from './product.model';
 import { ProductService } from './product.provider';
+import { JhiDataUtils } from 'ng-jhipster';
 
 @IonicPage({
     segment: 'product-detail/:id'
@@ -14,7 +15,8 @@ export class ProductDetailPage {
     product: Product;
 
     constructor(private modalCtrl: ModalController, params: NavParams,
-                private productService: ProductService, private toastCtrl: ToastController) {
+                private productService: ProductService, private toastCtrl: ToastController,
+                private dataUtils: JhiDataUtils) {
         this.product = new Product();
         this.product.id = params.get('id');
     }
@@ -36,5 +38,9 @@ export class ProductDetailPage {
             }
         });
         modal.present();
+    }
+
+    byteSize(field) {
+      return this.dataUtils.byteSize(field);
     }
 }

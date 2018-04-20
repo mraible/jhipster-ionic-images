@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage']
+})
 @Component({
   selector: 'page-entity',
   templateUrl: 'entity.html'

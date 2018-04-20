@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, ToastController } from 'ionic-angular';
 import { Product } from './product.model';
 import { ProductService } from './product.provider';
+import { JhiDataUtils } from 'ng-jhipster';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage', 'EntityPage']
+})
 @Component({
     selector: 'page-product',
     templateUrl: 'product.html'
@@ -14,7 +17,8 @@ export class ProductPage {
     // todo: add pagination
 
     constructor(private navCtrl: NavController, private productService: ProductService,
-                private modalCtrl: ModalController, private toastCtrl: ToastController) {
+                private modalCtrl: ModalController, private toastCtrl: ToastController,
+                private dataUtils: JhiDataUtils) {
         this.products = [];
     }
 
@@ -39,6 +43,10 @@ export class ProductPage {
 
     trackId(index: number, item: Product) {
         return item.id;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
     }
 
     open(slidingItem: any, item: Product) {

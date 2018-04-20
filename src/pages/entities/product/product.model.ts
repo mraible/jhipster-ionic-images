@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../../models';
+import { BaseEntity } from '../../../models';
 
 export class Product implements BaseEntity {
     constructor(

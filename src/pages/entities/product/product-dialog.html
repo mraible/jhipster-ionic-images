@@ -11,10 +11,10 @@
         </ion-buttons>
         <ion-buttons end>
             <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
-            <span color="primary" showWhen="ios">
-              {{ 'DONE_BUTTON' | translate }}
-            </span>
-            <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+                <span color="primary" showWhen="ios">
+                    {{ 'DONE_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -33,7 +33,18 @@
                 <ion-input type="number" placeholder="Price" formControlName="price"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-input type="hidden" placeholder="Image" formControlName="image"></ion-input>
+                <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 100px;" *ngIf="product?.image" alt="product image"/>
+                <div *ngIf="product?.image">
+                  <p>{{product.imageContentType}}, {{byteSize(product.image)}}</p>
+                  <button type="button" class="trash" (click)="clearInputImage('image', 'imageContentType', 'fileImage')">
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+                </div>
+                <input type="file" #fileInput style="display: none" (change)="setFileData($event, product, 'image', true)" accept="image/*"/>
+                <div *ngIf="!product?.image" (click)="getPicture()" ion-button icon-start>
+                    <ion-icon name="add-circle"></ion-icon>
+                    {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+                </div>
             </ion-item>
         </ion-list>
     </form>

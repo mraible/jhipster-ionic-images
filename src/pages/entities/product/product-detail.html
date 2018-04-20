@@ -6,24 +6,22 @@
 <ion-content padding>
     <ion-list>
         <ion-item>
-            <ion-label>Name</ion-label>
+            <ion-label fixed>Name</ion-label>
             <div item-content>
                 <span>{{product.name}}</span>
             </div>
         </ion-item>
         <ion-item>
-            <ion-label>Price</ion-label>
+            <ion-label fixed>Price</ion-label>
             <div item-content>
                 <span>{{product.price}}</span>
             </div>
         </ion-item>
         <ion-item>
-            <ion-label>Image</ion-label>
+            <ion-label fixed>Image</ion-label>
             <div item-content>
                 <div *ngIf="product.image">
-                    <a (click)="openFile(product.imageContentType, product.image)">
-                        <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
-                    </a>
+                    <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
                     {{product.imageContentType}}, {{byteSize(product.image)}}
                 </div>
             </div>
