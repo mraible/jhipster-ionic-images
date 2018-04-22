@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController, ViewController } 
 import { Product } from './product.model';
 import { ProductService } from './product.provider';
 import { JhiDataUtils } from 'ng-jhipster';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -16,6 +16,7 @@ export class ProductDialogPage {
     product: Product;
     isReadyToSave: boolean;
     form: FormGroup;
+    cameraOptions: CameraOptions;
 
     constructor(public navCtrl: NavController, public viewCtrl: ViewController, public toastCtrl: ToastController,
                 formBuilder: FormBuilder, params: NavParams,
@@ -42,6 +43,19 @@ export class ProductDialogPage {
         this.form.valueChanges.subscribe((v) => {
             this.isReadyToSave = this.form.valid;
         });
+
+        // Set the Camera options
+        this.cameraOptions = {
+          quality: 100,
+          targetWidth: 900,
+          targetHeight: 600,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE,
+          saveToPhotoAlbum: false,
+          allowEdit: true,
+          sourceType: 1
+        };
     }
 
     ionViewDidLoad() {}
@@ -76,14 +90,14 @@ export class ProductDialogPage {
       return this.dataUtils.openFile(contentType, field);
     }
 
+
     getPicture() {
       if (Camera['installed']()) {
-        this.camera.getPicture({
-          destinationType: this.camera.DestinationType.DATA_URL,
-          targetWidth: 96,
-          targetHeight: 96
-        }).then((data) => {
+        this.camera.getPicture(this.cameraOptions).then((data) => {
+          this.product.image = data;
+          this.product.imageContentType = 'image/jpeg';
           this.form.patchValue({ 'image': 'data:image/jpg;base64,' + data });
+          this.form.patchValue({ 'imageContentType': 'image/jpeg'});
         }, (err) => {
           alert('Unable to take photo');
         })

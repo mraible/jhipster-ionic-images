@@ -54,6 +54,10 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": "Need camera access to take pictures",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "Need photo library access to get pictures from there"
+      },
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
